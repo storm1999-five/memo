@@ -1,1 +1,80 @@
 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+ content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable"
+ content="yes">
+<meta name="apple-mobile-web-app-title"
+ content="マイメモ">
+<title>マイメモ</title>
+
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f3f5fa;
+  font-family: -apple-system, sans-serif;
+  color: #222;
+  padding: 30px 20px;
+}
+main {
+  max-width: 500px;
+  margin: auto;
+}
+h1 { font-size: 28px; }
+textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 15px;
+  font-size: 17px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  resize: vertical;
+}
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 16px;
+  border: 0;
+  border-radius: 12px;
+  background: #3267e8;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
+p { color: #666; }
+</style>
+</head>
+
+<body>
+<main>
+  <h1>📝 マイメモ</h1>
+  <p>自分専用のメモアプリ</p>
+
+  <textarea id="memo"
+    placeholder="ここにメモを入力"></textarea>
+  <button onclick="saveMemo()">保存する</button>
+  <p id="status"></p>
+</main>
+
+<script>
+const memo = document.getElementById("memo");
+const status = document.getElementById("status");
+
+memo.value = localStorage.getItem("memo") || "";
+
+function saveMemo() {
+  try {
+    localStorage.setItem("memo", memo.value);
+    status.textContent = "保存しました！";
+  } catch (e) {
+    status.textContent = "保存できませんでした";
+  }
+}
+</script>
+</body>
+</html>
+
